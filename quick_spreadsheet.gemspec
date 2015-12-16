@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'quick_spreadsheet'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2015-12-02'
   s.summary     = "Wraps other utilities to provide sensible defaults for spreadsheet generation."
   s.description = s.summary

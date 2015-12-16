@@ -2,11 +2,18 @@ require 'spreadsheet'
 require 'time'
 
 class QuickSpreadsheet
-  def self.create(args)
+  def self.args
+    puts "title: string"
+    puts "header_row: Array<string>"
+    puts "body_rows: Array<Array<string>>"
+    puts "folder_path: string (optional)"
+  end
+
+  def self.call(args)
     title       = args[:title]
-    folder_path = args[:folder_path]
     header_row  = args[:header_row]
     body_rows   = args[:body_rows]
+    folder_path = args[:folder_path] || "#{Dir.pwd}/tmp"
     format      = :xls
 
     FileUtils::mkdir_p(folder_path) unless File.exists?(folder_path)
