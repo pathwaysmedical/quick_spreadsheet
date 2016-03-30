@@ -1,13 +1,13 @@
 # quick_spreadsheet
-Sensible defaults for fast excel spreadsheet creation.
-
+Sensible defaults for fast Excel spreadsheet creation.
+Designed for use with Ruby on Rails applications.
 
 ## Installation
 
-Add it to your Gemfile:
+Assuming you have Bundler installed, add the gem to your Gemfile:
 
 ```ruby
-gem 'quick_spreadsheet', '0.0.3', git: "git@github.com:pathwaysmedical/quick_spreadsheet.git"
+gem 'quick_spreadsheet', '0.1.0', git: "git@github.com:pathwaysmedical/quick_spreadsheet.git"
 ```
 
 Run the following command to install it:
@@ -18,8 +18,9 @@ bundle install
 
 
 ## Usage
-`QuickSpreadsheet.call` accepts two types of syntax.
-Both are argument-order independent.
+
+### Call
+`QuickSpreadsheet.call` accepts two syntax variants. Both are argument-order independent.
 
 The first accepts the following options:
 
@@ -35,18 +36,25 @@ The first accepts the following options:
 The second accepts the following options:
 
 
-     Option          | Format              |
+     Option          | Contains              | Format              
      --------------- |:-------------------- |:--------------------
-     `sheets`         | `Array<Array<`      |
+     `sheets`         |               | `Array<`      
      | `title`         | `Array<string>`      
      | `header_row`    | `Array<string>`        
      | `body_rows`     | `Array<Array<string>`
-     `filename` (optional)   | `string`  |
-     `folder_path` (optional)   | `string`  |
+     `filename` (optional)   |           | `string`  
+     `folder_path` (optional)   |           | `string`  
 
-## Example
 
-To create a spreadsheet of all users by `name` and `id` attributes, assuming a Rails ActiveRecord model of `User`:
+
+### Args
+`QuickSpreadsheet.args` returns the acceptable arguments, as per the tables above.
+
+## Examples
+
+### Single worksheet example
+
+Here is an example using the simplest `QuickSpreadsheet.call` possible. To create a spreadsheet of all users by `id` and `name` attributes (assuming a Rails ActiveRecord model of `User`):
 
 ```ruby
 QuickSpreadsheet.call(
@@ -68,9 +76,11 @@ Will create a spreadsheet with this structure:
 
 
 
-The spreadsheet will be located in the `/tmp` folder in your app's root directory with the name of the spreadsheet and date time it was created:  `/tmp/ListofUsers_g<2016-02-03-16.09.xls`
+The spreadsheet will be located in the `/tmp` folder in your app's root directory with the name of the spreadsheet and date time it was created:  `/tmp/ListofUsers_g<2016-02-03-16.09.xls`.
 
-To create a spreadsheet with a first worksheet being a list of all users by `name` and `id` attributes, assuming a Rails ActiveRecord model of `User`, and a second worksheet of those users' ids and emails attributes:
+### Mulitiple worksheets example
+
+Here is an example using the nested `sheets` syntax, and also the optional `folder_path`. To create a spreadsheet with a first worksheet being a list of all users by `id` and `name` attributes (assuming a Rails ActiveRecord model of `User`), and a second worksheet of those users' `id` and `email` attributes:
 
 ```ruby
 QuickSpreadsheet.call(
@@ -111,5 +121,6 @@ Will create a spreadsheet with this structure:
 
 
 
-The spreadsheet will be located in the `/tmp` folder in your app's root directory with the name of the spreadsheet and date time it was created:  `~Users/documents/spreadsheets/ListofUsers_g<2016-02-03-16.09.xls`
+The spreadsheet will be located in the folder specified, with the name of the spreadsheet and date time it was created:  `~/Users/documents/spreadsheets/ListofUsers_g<2016-02-03-16.09.xls`.
+In this example, the file is named based upon the `title` of the first worksheet. To give it a different name, pass in the `filename` option, just as with the `folder_path` passed here.
 

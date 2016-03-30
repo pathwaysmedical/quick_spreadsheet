@@ -38,13 +38,13 @@ class QuickSpreadsheet
       "#{sheets[0][:title].gsub(" ", "")}_g#{file_timestamp}.#{format.to_s}"
     file_path = [ folder_path, filename ].join("/")
 
-    WRITE_FORMAT1[format].call(sheets, file_path)
+    WRITE_FORMAT[format].call(sheets, file_path)
     puts "Wrote your spreadsheet to '#{file_path}'."
 
     true
   end
 
-  WRITE_FORMAT1 = {
+  WRITE_FORMAT = {
     xls: Proc.new do |sheets, file_path|
       book = Spreadsheet::Workbook.new
       sheets.each do |sheet|
