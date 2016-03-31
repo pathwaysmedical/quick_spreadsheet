@@ -30,7 +30,7 @@ The first accepts the following options:
      `title`         | `Array<string>`      
      `header_row`    | `Array<string>`        
      `body_rows`     | `Array<Array<string>`
-     `filename` (optional)   | `string`  
+     `file_title` (optional)   | `string`  
      `folder_path` (optional)   | `string`  
 
 The second accepts the following options:
@@ -42,7 +42,7 @@ The second accepts the following options:
      | `title`         | `Array<string>`      
      | `header_row`    | `Array<string>`        
      | `body_rows`     | `Array<Array<string>`
-     `filename` (optional)   |           | `string`  
+     `file_title` (optional)   |           | `string`  
      `folder_path` (optional)   |           | `string`  
 
 
@@ -76,7 +76,7 @@ Will create a spreadsheet with this structure:
 
 
 
-The spreadsheet will be located in the `/tmp` folder in your app's root directory with the name of the spreadsheet and date time it was created:  `/tmp/ListofUsers_g<2016-02-03-16.09.xls`.
+The spreadsheet will be located in the `/tmp` folder in your app's root directory with the name of the spreadsheet and date time it was created: `/tmp/ListofUsers_g2016-02-03-16.09.xls`.
 
 ### Mulitiple worksheets example
 
@@ -96,7 +96,7 @@ QuickSpreadsheet.call(
       body_rows: User.all.map{|s| [s.id.to_s, s.email.to_s] } 
     }
   ],
-  folder_path: "~/User/documents/spreadsheets"
+  folder_path: "documents/spreadsheets"
 )
 ```
 
@@ -121,6 +121,6 @@ Will create a spreadsheet with this structure:
 
 
 
-The spreadsheet will be located in the folder specified, with the name of the spreadsheet and date time it was created:  `~/Users/documents/spreadsheets/ListofUsers_g<2016-02-03-16.09.xls`.
-In this example, the file is named based upon the `title` of the first worksheet. To give it a different name, pass in the `filename` option, just as with the `folder_path` passed here.
+The spreadsheet will be located in your app's root directory in the folder specified, with the name of the spreadsheet and date time it was created: `/documents/spreadsheets/ListofUsers_g2016-02-03-16.09.xls`.
+In this example, the file is named based upon the `title` of the first worksheet. To give it a different name, pass in the `file_title` option, just as with the `folder_path` passed here. With the `file_title` option, the file is named using `file_title` minus whitespace, plus a time stamp. So, in the example here, passing a `file_title` of "User List" would result in a file called `/documents/spreadsheets/UserList_g2016-02-03-16.09.xls`.
 

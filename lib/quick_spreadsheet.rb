@@ -3,7 +3,7 @@ require 'time'
 
 class QuickSpreadsheet
   def self.args
-    puts "filename: string (optional)"
+    puts "file_title: string (optional)"
     puts "folder_path: string (optional)"
     puts "Variant 1:"
     puts "  title: string"
@@ -37,10 +37,10 @@ class QuickSpreadsheet
       end
     
     filename =
-      if args[:filename].nil?
+      if args[:file_title].nil?
         "#{sheets[0][:title].gsub(" ", "")}_g#{file_timestamp}.#{format.to_s}"
       else
-        [ args[:filename], format.to_s ].join(".")
+        "#{args[:file_title].gsub(" ", "")}_g#{file_timestamp}.#{format.to_s}"
       end
 
     file_path = [ folder_path, filename ].join("/")
@@ -72,14 +72,14 @@ class QuickSpreadsheet
 end
 
 # There are two ways to call, and argument order is not important.
-# In each syntax, filename and folder_path are optional. Defaults to a
-# filename from the first (or only) title in a local tmp folder.
+# In each syntax, file_title and folder_path are optional. Defaults to a
+# file_title from the first (or only) title in a local tmp folder.
 
 # Call like this:
 
 # QuickSpreadsheet.call(
-#   filename: "Some_name",
-#   folder_path: "~/some/folder/path",
+#   file_title: "Some Name",
+#   folder_path: "some/folder/path",
 #   title: "My Spreadsheet",
 #   header_row: ["Some Header 1","Some Header 2"],
 #   body_rows: [['1','a'],['2','b']]
@@ -88,8 +88,8 @@ end
 # Or like this:
 
 # QuickSpreadsheet.call(
-#   filename: "Some_name",
-#   folder_path: "~/some/folder/path",
+#   file_title: "Some Name",
+#   folder_path: "some/folder/path",
 #   sheets: [
 #     {
 #       title: "My First Sheet",
