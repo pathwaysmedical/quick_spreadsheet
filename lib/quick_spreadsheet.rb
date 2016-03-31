@@ -18,27 +18,37 @@ class QuickSpreadsheet
 
   def self.call(args)
     time = Time.now
+
     file_timestamp = time.strftime("%Y-%m-%d-%H.%M")
 
     folder_path = args[:folder_path] || "#{Dir.pwd}/tmp"
-    FileUtils::mkdir_p(folder_path) unless File.exists?(folder_path)
-    format      = :xls
 
-    sheets = if args[:sheets]
-      args[:sheets]
-    else
-      [{
-        title:      args[:title],
-        header_row: args[:header_row],
-        body_rows:  args[:body_rows]
-      }]
-    end
+    format = :xls
+
+    sheets =
+      if args[:sheets]
+        args[:sheets]
+      else
+        [{
+          title:      args[:title],
+          header_row: args[:header_row],
+          body_rows:  args[:body_rows]
+        }]
+      end
     
-    filename = [ args[:filename], format.to_s ].join(".") or
-      "#{sheets[0][:title].gsub(" ", "")}_g#{file_timestamp}.#{format.to_s}"
+    filename =
+      if args[:filename].nil?
+        "#{sheets[0][:title].gsub(" ", "")}_g#{file_timestamp}.#{format.to_s}"
+      else
+        [ args[:filename], format.to_s ].join(".")
+      end
+
     file_path = [ folder_path, filename ].join("/")
 
+    FileUtils::mkdir_p(folder_path) unless File.exists?(folder_path)
+
     WRITE_FORMAT[format].call(sheets, file_path)
+
     puts "Wrote your spreadsheet to '#{file_path}'."
 
     true
