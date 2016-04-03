@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'quick_spreadsheet'
-  s.version     = '0.0.3'
-  s.date        = '2015-12-02'
+  s.version     = '0.1.0'
+  s.date        = '2016-03-30'
   s.summary     = "Wraps other utilities to provide sensible defaults for spreadsheet generation."
   s.description = s.summary
-  s.authors     = ["Brian Gracie"]
+  s.authors     = ["Brian Gracie","Daniel Museakamp"]
   s.email       = 'bgracie@gmail.com'
   s.files       = ["lib/quick_spreadsheet.rb"]
   s.license     = 'MIT'
