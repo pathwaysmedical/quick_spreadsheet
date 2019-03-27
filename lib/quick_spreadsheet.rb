@@ -51,7 +51,7 @@ class QuickSpreadsheet
 
     puts "Wrote your spreadsheet to '#{file_path}'."
 
-    true
+    file_path
   end
 
   WRITE_FORMAT = {
