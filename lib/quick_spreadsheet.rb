@@ -45,7 +45,7 @@ class QuickSpreadsheet
 
     file_path = [ folder_path, filename ].join("/")
 
-    FileUtils::mkdir_p(folder_path) unless File.exists?(folder_path)
+    FileUtils::mkdir_p(folder_path) unless File.exist?(folder_path)
 
     WRITE_FORMAT[format].call(sheets, file_path)
 
